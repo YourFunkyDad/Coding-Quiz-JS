@@ -1,0 +1,17 @@
+.container {
+    width: 800px;
+    max-width: 80%;
+    background-color: blanchedalmond;
+    border-radius: 3px;
+    padding: 10px;
+    box-shadow: 0 0 3px 2px;
+}
+
+.question-container {
+    width: 800px;
+    max-width: 80%;
+    background-color: blanchedalmond;
+    border-radius: 3px;
+    padding: 10px;
+    box-shadow: 0 0 3px 2px;
+}
