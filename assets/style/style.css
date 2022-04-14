@@ -30,7 +30,12 @@ h3 {
 }
 
 ul {
+    list-style-type: none;
     padding: 5px;
+}
+
+ul li label {
+    cursor: pointer;
 }
 
 button {
@@ -46,4 +51,8 @@ button {
 
 button:hover {
     background-color: darkorchid;
+}
+
+button:focus {
+    background-color: green;
 }
