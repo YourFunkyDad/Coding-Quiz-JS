@@ -1,44 +1,51 @@
 const questions = [
     {
-        question: 'Is coding fun?',
-        a: 'Yes',
-        b: 'Yes',
-        c: 'Yes',
-        d: 'Yes',
-
-        correct: 'a',
-        correct: 'b',
-        correct: 'c',
-        correct: 'd',
-            
+        question: '_______ is the process of finding errors and fixing them within a program.',
+        a: 'Debugging',
+        b: 'Compiling',
+        c: 'Executing',
+        d: 'Scanning',
+        correct: 'a',    
     },  
     {
         question: 'Commonly used data types DO NOT Include:?',
-             a: 'Strings', correct: false ,
-             b: 'Booleans', correct: true ,
-             c: 'Alerts', correct: false ,
-             d: 'Numbers', correct: false 
+             a: 'Strings', 
+             b: 'Booleans',
+             c: 'Alerts', 
+             d: 'Numbers',
+             correct: 'b',
+    },
+    {
+        question: 'A structure that allows repeated execution of a block of statements is a(n) ________.',
+             a: 'Sequence', 
+             b: 'Selection',
+             c: 'Array', 
+             d: 'Loop',
+             correct: 'd',
     },
     {
         question: 'String values must be enclosed within _______ when being assigned to variables.',
-            a: 'Commas', correct: false ,
-            b: 'Curly Brackets', correct: false ,
-            c: 'Quotes', correct: true ,
-            c: 'Parenthesis', correct: false 
+            a: 'Commas',
+            b: 'Curly Brackets',
+            c: 'Quotes',
+            d: 'Parenthesis',
+            correct: 'c',
     },
     {
         question: 'A very useful tool used during development and debugging for printing content to the debugger is:',
-            a: 'JavaScript', correct: false ,
-            b: 'Terminal/Bash', correct: false ,
-            c: 'For Loops', correct: false ,
-            c: 'console.log', correct: true 
+            a: 'JavaScript', 
+            b: 'Terminal/Bash', 
+            c: 'For Loops', 
+            d: 'console.log', 
+            correct: 'd',
     },
     {
         question: 'Arrays in JavaScript can be used to store _______.',
-            a: 'Numbers and Strings', correct: false ,
-            b: 'Other Arrays', correct: false ,
-            c: 'Booleans', correct: false ,
-            c: 'All of the above', correct: true 
+            a: 'Numbers and Strings',
+            b: 'Other Arrays',
+            c: 'Booleans',
+            d: 'All of the above', 
+            correct: 'd',
     },  
 ];
 
@@ -54,23 +61,25 @@ const submitBtn = document.getElementById('submit')
 let currentQuiz = 0
 let score = 0
 
+loadQuiz()
+
 function loadQuiz() {
     deselectAnswers()
-    const currentQuizData = quizData[currentQuiz]
+    const currentQuestions = questions[currentQuiz]
 
-    questionEl.innerText = currentQuizData.question
-    a_text.innerText = currentQuizData.a
-    b_text.innerText = currentQuizData.b
-    c_text.innerText = currentQuizData.c
-    d_text.innerText = currentQuizData.d
+    questionEl.innerText = currentQuestions.question
+    a_text.innerText = currentQuestions.a
+    b_text.innerText = currentQuestions.b
+    c_text.innerText = currentQuestions.c
+    d_text.innerText = currentQuestions.d
 }
 
 function deselectAnswers() {
-    answerEls.forEach(answerEls => answerEls.checked = false)
+    answerEls.forEach(answerEl => answerEl.checked = false)
 }
 
 function getSelected() {
-    let answerEls
+    let answer
     answerEls.forEach(answerEl => {
         if(answerEl.checked) {
             answer = answerEl.id
@@ -78,3 +87,23 @@ function getSelected() {
     })
     return answer
 }
+
+submitBtn.addEventListener('click', () => {
+    const answer = getSelected()
+    if(answer) {
+        if (answer === questions[currentQuiz].correct) {
+          score++  
+        }
+        currentQuiz++
+
+        if(currentQuiz < questions.length) {
+            loadQuiz()
+        } else {
+            quiz.innerHTML = `
+            <h3>You answered ${score}/${questions.length} questions correctly! </h3>
+            
+            <button onclick="location.reload()">Restart</button>`
+        }
+    }
+})
+
