@@ -130,4 +130,3 @@ submitBtn.addEventListener('click', () => {
         }
     }
 })
-
